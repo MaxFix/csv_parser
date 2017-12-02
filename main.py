@@ -1,9 +1,7 @@
 # -*- coding=utf-8 -*-
-
 # from __future__ import CO_FUTURE_ABSOLUTE_IMPORT
 
 import telebot
-# from . \
 import settings
 import csv
 from datetime import datetime
@@ -29,8 +27,6 @@ def log(message, answer):
                 message.text))
     print(answer)
 
-answer = "Ты не умеешь играть в эту игру..."
-
 
 class Responser(object):
 
@@ -40,7 +36,7 @@ class Responser(object):
     def __init__(self, path):
         self.lines = []
         self.data = {}
-        for line in csv.reader(open(path, 'r'), delimiter=':'):
+        for line in csv.reader(open(path, 'r'), delimiter='—'):
             self.lines.append(line)
             print(line)
             self.data[line[0].strip().lower()] = line[1].strip().lower()
@@ -63,7 +59,7 @@ responser = Responser('test_csv.csv')
 
 @bot.message_handler(commands=['help'])
 def handle_message(message):
-        bot.send_message(message.chat.id, "Я работаю!!!")
+        bot.send_message(message.chat.id, "Показывается калорийность продуктов на 100 грамм веса")
 
 
 @bot.message_handler(content_types=['text'])
@@ -76,19 +72,6 @@ def handle_message(message):
         bot.send_message(message.chat.id, answ)
     else:
         bot.send_message(message.chat.id, '{}: {}'.format(Answers.do_not_know, message.text))
-
-    """ answer = "Ты не умеешь играть в эту игру..."
-    if message.text == "шампиньоны":
-        answer = "27 кал/100гр"
-        bot.send_message(message.chat.id, "27 кал/100гр")
-        log(message,answer)
-    elif message.text == "булгур":
-        answer = "342 кал/100гр"
-        bot.send_message(message.chat.id, "342 кал/100гр")
-        log(message,answer)
-    else:
-        bot.send_message(message.chat.id, answer)
-        log(message,answer) """
 
 
 bot.polling(none_stop = True, interval=1)

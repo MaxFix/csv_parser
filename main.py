@@ -1,5 +1,12 @@
+# -*- coding=utf-8 -*-
+
+# from __future__ import CO_FUTURE_ABSOLUTE_IMPORT
+
 import telebot
+# from . \
 import settings
+import csv
+from datetime import datetime
 
 bot = telebot.TeleBot(settings.token)
 
@@ -7,31 +14,52 @@ bot = telebot.TeleBot(settings.token)
 print(bot.get_me())
 
 
+class Answers(object):
+    do_not_know = 'I do not know this'
+
+
 def log(message, answer):
     print("\n ---------")
-    from datetime import datetime
     print(datetime.now())
-    print("Сообщение от {0} {1}. (id = {2}) \n Текст {3}".format(message.from_user.first_name,
-                                                                 message.from_user.last_name,
-                                                                 str(message.from_user.id),
-                                                                 message.text))
+    print("Сообщение от {0} {1}. (id = {2}) \n Текст {3}"
+          "".format(
+                message.from_user.first_name,
+                message.from_user.last_name,
+                str(message.from_user.id),
+                message.text))
     print(answer)
 
 answer = "Ты не умеешь играть в эту игру..."
 
 
 class Responser(object):
-    class Responser(object):
-        def __init__(self):
-            f = open('cal.csv')
-            f.read(message)
 
-        def get_answer(self, question):
-            if question in self.data:
-                return self.data[question]
-            else:
-                bot.send_message(message.chat.id, answer)
-                log(message, answer)  # return default response
+    lines = []
+    data = {}
+
+    def __init__(self, path):
+        self.lines = []
+        self.data = {}
+        for line in csv.reader(open(path, 'r'), delimiter=':'):
+            self.lines.append(line)
+            print(line)
+            self.data[line[0].strip().lower()] = line[1].strip().lower()
+
+    def get_answer(self, question):
+        que = question.strip().lower()
+        if que in self.data.keys():
+            print('Bot know: {}'.format(self.data[que]))
+            return self.data[que]
+        else:
+            # bot.send_message(chat_id, '{}: {}'.format(Answers.do_not_know, que))
+
+            print('Bot do not know: {}'.format(que))
+            return None
+            # log(message, answer)  # return default response
+
+
+responser = Responser('test_csv.csv')
+
 
 @bot.message_handler(commands=['help'])
 def handle_message(message):
@@ -39,9 +67,15 @@ def handle_message(message):
 
 
 @bot.message_handler(content_types=['text'])
-
-
 def handle_message(message):
+    log(message, None)
+
+    answ = responser.get_answer(message.text)
+
+    if answ:
+        bot.send_message(message.chat.id, answ)
+    else:
+        bot.send_message(message.chat.id, '{}: {}'.format(Answers.do_not_know, message.text))
 
     """ answer = "Ты не умеешь играть в эту игру..."
     if message.text == "шампиньоны":
@@ -56,4 +90,5 @@ def handle_message(message):
         bot.send_message(message.chat.id, answer)
         log(message,answer) """
 
-bot.polling(none_stop = True, interval = 0)
+
+bot.polling(none_stop = True, interval=1)

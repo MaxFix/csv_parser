@@ -1,7 +1,7 @@
 import telebot
-import constants
+import settings
 
-bot = telebot.TeleBot(constants.token)
+bot = telebot.TeleBot(settings.token)
 
 
 print(bot.get_me())

@@ -54,8 +54,7 @@ class Responser(object):
             # log(message, answer)  # return default response
 
 
-responser = Responser('test_csv.csv')
-
+responser = Responser(settings.csv_file)
 
 @bot.message_handler(commands=['help'])
 def handle_message(message):

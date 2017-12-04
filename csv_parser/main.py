@@ -1,23 +1,20 @@
 # -*- coding=utf-8 -*-
-# from __future__ import CO_FUTURE_ABSOLUTE_IMPORT
+from __future__ import absolute_import
 
 import telebot
-import settings
 import csv
 from datetime import datetime
 
+import settings
+from constants import Answers
+from csv_parser.exceptions import Cancel, MissIndex
+
 bot = telebot.TeleBot(settings.token)
-
-
 print(bot.get_me())
 
 
-class Answers(object):
-    dnt_know = 'Я не знаю такой продукт'
-
-
 def log(message, answer):
-    print('\n{}'.format("-"*30))
+    print('\n{}'.format("-"*50))
     print(datetime.now())
     print("Сообщение от {0} {1} (id = {2})\nchat: {3}\nТекст: {4}"
           "".format(
@@ -35,6 +32,7 @@ class Responser(object):
     data = {}
 
     def __init__(self, path):
+        # TODO this logic will be moved to separated class
         self.lines = []
         self.data = {}
         for line in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
@@ -42,7 +40,7 @@ class Responser(object):
             print(line)
             self.data[line[0].strip().lower()] = line[1].strip().lower()
 
-    def get_answer(self, question):
+    def get_answer(self, question, *args, **kwargs):
         que = question.strip().lower()
         if que in self.data.keys():
             print('Bot know: {}'.format(self.data[que]))
@@ -76,7 +74,10 @@ def handle_message(message):
 def handle_message(message):
     log(message, None)
 
-    answ = responser.get_answer(message.text)
+    try:
+        answ = responser.get_answer(message.text, message.chat.id)
+    except (Cancel, MissIndex):
+        return
 
     if answ:
         bot.send_message(message.chat.id, answ)
@@ -84,5 +85,3 @@ def handle_message(message):
         bot.send_message(message.chat.id,
                          '{}: {}'.format(Answers.dnt_know, message.text))
 
-
-bot.polling(none_stop=True, interval=1)

@@ -31,18 +31,13 @@ class Storage(object):
             else:
                 find_str = False
                 return None
-class Entry(object):
+class Food(object, value, name, aliases_all, aliases_set):
     def __init__(self):
-        pass
+        value = line[1] # значение из предыдущей версии
+        name = line [0] # ключ из 1го файла
+        aliases_all = pass
+        aliases_set = pass
 
     def __str__(self):
         pass
         return name
-    def entry_param(self, value, name, aliases_all, aliases_sample):
-        pass
-
-
-#У него будет переопределен метод str, он будет возвращать имя.
-#Соотвественно check_aliases будет принимать экземпляры класса Entry для сравнения и строку поиска. Как у тебя сейчас.
-
-

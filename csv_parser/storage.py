@@ -31,13 +31,25 @@ class Storage(object):
             else:
                 find_str = False
                 return None
-class Food(object, value, name, aliases_all, aliases_set):
-    def __init__(self):
-        value = line[1] # значение из предыдущей версии
-        name = line [0] # ключ из 1го файла
-        aliases_all = pass
-        aliases_set = pass
+
+
+class Food(object):
+    def __init__(self, value, name):
+        self.value = value  # значение из предыдущей версии
+        self.name = name  # ключ из 1го файла
+        #
+        self._init_aliases()
 
     def __str__(self):
+        return self.name
+
+    def _init_aliases(self):
+        # self.name
+        self.aliases_all = []
+        self.aliases_set = []
         pass
-        return name
+
+row = Food('255 kcl', 'йцуццу')
+print(row.value)
+print(str(row))
+

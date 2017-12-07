@@ -53,7 +53,8 @@ class Responser(object):
             # log(message, answer)  # return default response
 
 
-responser = Responser(settings.csv_file)
+responser = Responser(path=settings.csv_file)
+len(responser.lines)
 
 
 @bot.message_handler(commands=['start'])

@@ -1,7 +1,16 @@
 class Storage(object):
 
-    def __init__(self, path):                                   # имя файла в конструкторе path
-        pass
+    lines = []
+    data = {}
+
+    def __init__(self, path):
+        # TODO this logic will be moved to separated class
+        self.lines = []
+        self.data = {}
+        for line in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
+            self.lines.append(line)
+            print(line)
+            self.data[line[0].strip().lower()] = line[1].strip().lower()
 
     def find_entry(self, sought_for, search_aliases=False):     # строка поиска
         res = None
@@ -46,8 +55,15 @@ class Food(object):
     def _init_aliases(self):
         # self.name
         self.aliases_all = []
+        #pos = filter(aliases_all == value , self.name)
+        for pos1 in self.name:
+            if pos1 != " ":
+                return self.name[self.aliases_all]
         self.aliases_set = []
-        pass
+        #pos1 = filter(aliases_set == value , self.name)
+        for pos2 in self.name:
+            if pos2 = "@":
+                return self.name[self.aliases_set]
 
 row = Food('255 kcl', 'йцуццу')
 print(row.value)

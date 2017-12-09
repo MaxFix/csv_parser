@@ -5,16 +5,17 @@ class Storage(object):
 
     def __init__(self, path):
         # TODO this logic will be moved to separated class
-        self.lines = []
-        self.data = {}
-        for line in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
-            self.lines.append(line)
-            print(line)
-            self.data[line[0].strip().lower()] = line[1].strip().lower()
+        self.lines = [] # экземпляры класса Food, v lines
+        Food == Food.name
+
+        for Food.name in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
+            self.lines.append(Food)
+            print(Food)
+            self.data[Food[0].strip().lower()] = Food[1].strip().lower()
 
     def find_entry(self, sought_for, search_aliases=False):     # строка поиска
         res = None
-        for item in Entry:                                      # item будет инстансом нового класса
+        for item in Food:                                      # item будет инстансом нового класса
             if item.name == sought_for:                         # нужно привести в одинаковый регистр
                 res = item
                 break
@@ -33,7 +34,7 @@ class Storage(object):
 
     def check_aliases(self, aliases, find_str):                 # метод проверки псевдонимов (alias`ов)
 
-        for aliases in Entry:                                   # запись из нового класса Entry, вместо строк
+        for aliases in Food:                                   # запись из нового класса Entry, вместо строк
             if aliases == find_str:                             # если псевдоним совпадает со строкой
                 find_str = True                                 # найдена верная строка
                 print(find_str)
@@ -46,7 +47,6 @@ class Food(object):
     def __init__(self, value, name):
         self.value = value  # значение из предыдущей версии
         self.name = name  # ключ из 1го файла
-        #
         self._init_aliases()
 
     def __str__(self):
@@ -55,14 +55,12 @@ class Food(object):
     def _init_aliases(self):
         # self.name
         self.aliases_all = []
-        #pos = filter(aliases_all == value , self.name)
-        for pos1 in self.name:
-            if pos1 != " ":
+        # http://pythonz.net/references/named/str.split/
+        for space in self.name.split(' '):
+            for space1 in self.name.strip(' '):
                 return self.name[self.aliases_all]
         self.aliases_set = []
-        #pos1 = filter(aliases_set == value , self.name)
-        for pos2 in self.name:
-            if pos2 = "@":
+        for char in self.name.split(' .,<>!?/\[]()~_-=+`@#$%^&*'):
                 return self.name[self.aliases_set]
 
 row = Food('255 kcl', 'йцуццу')

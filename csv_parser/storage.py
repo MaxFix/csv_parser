@@ -6,12 +6,12 @@ class Storage(object):
     def __init__(self, path):
         # TODO this logic will be moved to separated class
         self.lines = [] # экземпляры класса Food, v lines
-        Food == Food.name
+        foo = Food(value, name)
 
-        for Food.name in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
-            self.lines.append(Food)
-            print(Food)
-            self.data[Food[0].strip().lower()] = Food[1].strip().lower()
+        for F in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
+            self.lines.append(foo)
+            print(foo)
+            self.data[foo[0].strip().lower()] = foo[1].strip().lower()
 
     def find_entry(self, sought_for, search_aliases=False):     # строка поиска
         res = None

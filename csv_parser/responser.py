@@ -92,7 +92,7 @@ class Responser(object):
                 try:
                     del self.sessions[chat_id]
                 except KeyError:
-                    pass
+                    print("That key does not exist")
 
                 self.sessions[chat_id] = PollSession(result)
 
@@ -104,10 +104,10 @@ class Responser(object):
         else:
             return answ
 
-    def make_poll_answer(self, variants):
+    def make_poll_answer(self, options):
         lines = []
-        for i in range(len(variants)):
-            lines.append('{}. {}'.format(str(i+1).ljust(2), str(variants[i])))
+        for i in range(len(options)):
+            lines.append('{}. {}'.format(str(i+1).ljust(2), str(options[i])))
 
         answ = '\n'.join(lines)
         answ = '{}\n0. {}'.format(answ, 'Отмена')

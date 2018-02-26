@@ -8,7 +8,7 @@ class Storage(object):
         self.lines = [] # экземпляры класса Food, v lines
         foo = Food(value, name)
 
-        for F in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
+        for foo in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
             self.lines.append(foo)
             print(foo)
             self.data[foo[0].strip().lower()] = foo[1].strip().lower()

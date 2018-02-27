@@ -20,10 +20,10 @@ class Storage(object):
                 res = item
                 break
         if res:
-            return res
+            return res                              # Вот здесь непонятно. если item = sought, то результат = item. И далее условие нужно о5 же дописать, как Я понял.вместо 22 и 23 строки можно написать else и обработать не найденный результат, например.
 
-        elif search_aliases:
-            pass
+        elif search_aliases:                        # Как Я понял, здесь нужно написать поиск по алиасам?но Я уже вижу поиск и сравнение после. 25 и 26 Я бы удалил
+            item.name == 
 
         if search_aliases in self.data.keys():                            # поиск по ключу, как в Responser`e
             print('Bot know: {}'.format(self.data[search_aliases]))
@@ -55,7 +55,7 @@ class Food(object):
     def _init_aliases(self):
         # self.name
         self.aliases_all = []
-        # http://pythonz.net/references/named/str.split/
+
         for space in self.name.split(' '):
             for space1 in self.name.strip(' '):
                 return self.name[self.aliases_all]
@@ -63,7 +63,7 @@ class Food(object):
         for char in self.name.split(' .,<>!?/\[]()~_-=+`@#$%^&*'):
                 return self.name[self.aliases_set]
 
-row = Food('255 kcl', 'йцуццу')
-print(row.value)
-print(str(row))
+#row = Food('255 kcl', 'йцуццу')
+#print(row.value)
+#print(str(row))
 

@@ -1,46 +1,52 @@
+import csv
+
 class Storage(object):
 
-    lines = []
     data = {}
 
     def __init__(self, path):
         # TODO this logic will be moved to separated class
-        self.lines = [] # экземпляры класса Food, v lines
-        foo = Food(value, name)
 
         for foo in csv.reader(open(path, 'r', encoding='utf-8'), delimiter='—'):
-            self.lines.append(foo)
-            print(foo)
-            self.data[foo[0].strip().lower()] = foo[1].strip().lower()
+            food = Food(foo[0].strip().lower(), foo[1].strip().lower())
+            self.data[food.name.lower()] = food
 
     def find_entry(self, sought_for, search_aliases=False):     # строка поиска
-        res = None
-        for item in Food:                                      # item будет инстансом нового класса
-            if item.name == sought_for:                         # нужно привести в одинаковый регистр
-                res = item
-                break
-        if res:
-            return res                              # Вот здесь непонятно. если item = sought, то результат = item. И далее условие нужно о5 же дописать, как Я понял.вместо 22 и 23 строки можно написать else и обработать не найденный результат, например.
+        """
+        :param sought_for: Искомое
+        :param search_aliases: флаг, показывает нужно ли искать в алиасах
+        :return:
+        """
+        # res = None
+        # for item in Food:                                      # item будет инстансом нового класса
+        #     if item.name == sought_for:                         # нужно привести в одинаковый регистр
+        #         res = item
+        #         break
+        # if res != item: #?
+        #     return
+        try:
+            res = self.data[sought_for.lower().strip()]
+        except KeyError:
+            res = None
 
-        elif search_aliases:                        # Как Я понял, здесь нужно написать поиск по алиасам?но Я уже вижу поиск и сравнение после. 25 и 26 Я бы удалил
-            item.name == 
+        al_res = []
+        if search_aliases:  # условие не полное, нужно дополнить: ищем, если установлен флаг и не нашли res
+            # искать в алиасах
 
-        if search_aliases in self.data.keys():                            # поиск по ключу, как в Responser`e
-            print('Bot know: {}'.format(self.data[search_aliases]))
-            return self.data[search_aliases]
-        else:
-            print('Bot do not know: {}'.format(search_aliases))
-            return None
+            al_res = self.check_aliases(sought_for, )
 
-    def check_aliases(self, aliases, find_str):                 # метод проверки псевдонимов (alias`ов)
+        return res, al_res
 
-        for aliases in Food:                                   # запись из нового класса Entry, вместо строк
-            if aliases == find_str:                             # если псевдоним совпадает со строкой
-                find_str = True                                 # найдена верная строка
-                print(find_str)
-            else:
-                find_str = False
-                return None
+    def check_aliases(self, find_str, aliases):                 # метод проверки псевдонимов (alias`ов)
+    #
+    #     for aliases in Food:                                   # запись из нового класса Entry, вместо строк
+    #         if aliases == find_str:                             # если псевдоним совпадает со строкой
+    #             find_str = True                                 # найдена верная строка
+    #             print(find_str)
+    #         else:
+    #             find_str = False
+    #             return None            //ПЕРЕПИСАТЬ!!!
+        pass
 
 
 class Food(object):
@@ -55,15 +61,10 @@ class Food(object):
     def _init_aliases(self):
         # self.name
         self.aliases_all = []
-
+        # http://pythonz.net/references/named/str.split/
         for space in self.name.split(' '):
             for space1 in self.name.strip(' '):
                 return self.name[self.aliases_all]
         self.aliases_set = []
         for char in self.name.split(' .,<>!?/\[]()~_-=+`@#$%^&*'):
                 return self.name[self.aliases_set]
-
-#row = Food('255 kcl', 'йцуццу')
-#print(row.value)
-#print(str(row))
-

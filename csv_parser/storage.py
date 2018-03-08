@@ -30,26 +30,27 @@ class Storage(object):
             res = None
 
         al_res = []
-        if search_aliases:  # условие не полное, нужно дополнить: ищем, если установлен флаг и не нашли res
+        if search_aliases == True:  # условие не полное, нужно дополнить: ищем, если установлен флаг и не нашли res
             # искать в алиасах
 
-            al_res = self.check_aliases(sought_for, )
+            al_res = self.check_aliases(sought_for)
 
         return res, al_res
 
     def check_aliases(self, find_str, aliases):                 # метод проверки псевдонимов (alias`ов)
-    #
-    #     for aliases in Food:                                   # запись из нового класса Entry, вместо строк
-    #         if aliases == find_str:                             # если псевдоним совпадает со строкой
-    #             find_str = True                                 # найдена верная строка
-    #             print(find_str)
-    #         else:
-    #             find_str = False
-    #             return None            //ПЕРЕПИСАТЬ!!!
+
+        for aliases in ???:
+            if aliases == find_str:
+                find_str = True
+                print(find_str)
+            else:
+                find_str = False
+                return None            #ПЕРЕПИСАТЬ!!!
         pass
 
 
 class Food(object):
+    aliases_all = []
     def __init__(self, value, name):
         self.value = value  # значение из предыдущей версии
         self.name = name  # ключ из 1го файла
@@ -60,11 +61,10 @@ class Food(object):
 
     def _init_aliases(self):
         # self.name
+        name = self.name.strip()
         self.aliases_all = []
-        # http://pythonz.net/references/named/str.split/
-        for space in self.name.split(' '):
-            for space1 in self.name.strip(' '):
-                return self.name[self.aliases_all]
-        self.aliases_set = []
-        for char in self.name.split(' .,<>!?/\[]()~_-=+`@#$%^&*'):
-                return self.name[self.aliases_set]
+        symb = '.,<>!?/\[]()~_-=+`@#$%^&*'
+        for i in symb:
+            name.replace(symb, '')
+            for j in self.name.split(' '):
+                return name

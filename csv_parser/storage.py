@@ -39,7 +39,7 @@ class Storage(object):
 
     def check_aliases(self, find_str, aliases):                 # метод проверки псевдонимов (alias`ов)
 
-        for aliases in ???:
+        for aliases in []:
             if aliases == find_str:
                 find_str = True
                 print(find_str)
@@ -51,7 +51,7 @@ class Storage(object):
 
 class Food(object):
     aliases_all = []
-    def __init__(self, value, name):
+    def __init__(self, name, value):
         self.value = value  # значение из предыдущей версии
         self.name = name  # ключ из 1го файла
         self._init_aliases()
@@ -61,10 +61,11 @@ class Food(object):
 
     def _init_aliases(self):
         # self.name
-        name = self.name.strip()
-        self.aliases_all = []
         symb = '.,<>!?/\[]()~_-=+`@#$%^&*'
-        for i in symb:
-            name.replace(symb, '')
-            for j in self.name.split(' '):
-                return name
+        name = self.name.split(" ")
+        name = self.name.strip()
+
+        self.aliases_all = []
+
+
+        self.aliases_all.append(name)

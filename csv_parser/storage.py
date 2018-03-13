@@ -61,11 +61,12 @@ class Food(object):
 
     def _init_aliases(self):
         # self.name
-        symb = '.,<>!?/\[]()~_-=+`@#$%^&*'
-        name = self.name.split(" ")
         name = self.name.strip()
+        name = self.name.split(" ")
+
+        symb = '.,<>!?/\[]()~_-=+`@#$%^&*'
+        for element in symb:
+            self.name.replace(element, '')
 
         self.aliases_all = []
-
-
         self.aliases_all.append(name)

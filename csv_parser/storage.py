@@ -47,8 +47,7 @@ class Food(object):
         # self.name
 
         symb = '.,<>!?/\[]()~_-=+`@:\'#$%^&*'
-        name = self.name.split(" ")
-        name = self.name.strip()
+        name = self.name.strip().split(" ")
 
         for i in symb:
             name = name.replace(i, '')

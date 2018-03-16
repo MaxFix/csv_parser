@@ -53,4 +53,3 @@ class Food(object):
 
         self.name = self.name.strip().split(" ")
         self.aliases_all = self.name
-        # self.aliases_all.append(self.name)

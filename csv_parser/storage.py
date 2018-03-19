@@ -37,19 +37,17 @@ class Food(object):
     def __init__(self, name, value):
         self.name = name  # ключ из 1го файла
         self.value = value  # значение из предыдущей версии
-
-        #
         self._init_aliases()
 
     def __str__(self):
         return self.name
 
     def _init_aliases(self):
-        # self.name
+        name_c = self.name
         symb = '.,<>!?/\[]()~_-=+`@:\'#$%^&*'
 
         for i in symb:
-            self.name = self.name.replace(i, '')
+            name_c = name_c.replace(i, '')
 
-        self.name = self.name.strip().split(" ")
-        self.aliases_all = self.name
+        name_c = name_c.strip().split(" ")
+        self.aliases_all = name_c

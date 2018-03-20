@@ -34,9 +34,10 @@ class Storage(object):
 
 
 class Food(object):
-    def __init__(self, value, name):
-        self.value = value  # значение из предыдущей версии
+    def __init__(self, name, value):
         self.name = name  # ключ из 1го файла
+        self.value = value  # значение из предыдущей версии
+
         #
         self._init_aliases()
 
@@ -45,11 +46,10 @@ class Food(object):
 
     def _init_aliases(self):
         # self.name
-        self.aliases_all = []
-        self.aliases_set = []
-        pass
+        symb = '.,<>!?/\[]()~_-=+`@:\'#$%^&*'
 
-row = Food('255 kcl', 'йцуццу')
-print(row.value)
-print(str(row))
+        for i in symb:
+            self.name = self.name.replace(i, '')
 
+        self.name = self.name.strip().split(" ")
+        self.aliases_all = self.name

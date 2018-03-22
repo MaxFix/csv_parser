@@ -1,4 +1,4 @@
-from csv_parser.csv_parser.storage import Food
+from csv_parser.storage import Food
 
 
 def test_food_method_init_aliases_01():
@@ -25,6 +25,18 @@ def test_food_method_init_aliases_without_state_changes():
 
 def test_food_method_has_alias():
     f = Food('слива черная сушеная', '123 ккал')
+
+    assert f.has_alias('слива')
+    assert f.has_alias('черная')
+    assert f.has_alias('сушеная')
+
+    assert not f.has_alias('вишня')
+    assert not f.has_alias('красная')
+    assert not f.has_alias('замороженная')
+
+
+def test_food_method_has_alias_2():
+    f = Food('слива   черная   сушеная', '123 ккал')
 
     assert f.has_alias('слива')
     assert f.has_alias('черная')

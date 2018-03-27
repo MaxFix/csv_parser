@@ -52,10 +52,9 @@ class Food(object):
         name_c = name_c.strip().split(" ")
         self.aliases_all = name_c
 
-    def has_alias(self, sought, name_c):
-        for s in name_c:
+    def has_alias(self, sought):
+        for s in self.aliases_all:
             if s == sought:
                 return True
             else:
                 return False
-

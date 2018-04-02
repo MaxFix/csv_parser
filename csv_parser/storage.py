@@ -54,9 +54,7 @@ class Food(object):
 
     def has_alias(self, sought):
         for s in self.aliases_all:
-            print(s, sought)
             if s == sought:
                 return True
             else:
                 False
-

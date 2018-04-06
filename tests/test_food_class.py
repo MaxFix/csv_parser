@@ -1,4 +1,4 @@
-from csv_parser.csv_parser.storage import Food
+from csv_parser.storage import Food
 
 
 def test_food_method_init_aliases_01():

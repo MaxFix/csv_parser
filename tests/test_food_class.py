@@ -45,4 +45,3 @@ def test_food_method_has_alias_2():
     assert not f.has_alias('вишня')
     assert not f.has_alias('красная')
     assert not f.has_alias('замороженная')
-

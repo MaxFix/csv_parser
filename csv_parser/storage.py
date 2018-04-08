@@ -1,15 +1,16 @@
-
-
 def get_words(src):
     res = list()
 
     name_c = src
-    symb = '.,<>!?/\[]()~_-=+`@:\'#$%^&*'
+    symb = '.,<>!?/\[]()~_-=+`@:;\'#$%^&*'
 
     for i in symb:
         name_c = name_c.replace(i, '')
 
     name_c = name_c.strip().split(" ")
+    while '' in name_c:
+        name_c.remove('')
+
     res = name_c
 
     return res
@@ -39,15 +40,15 @@ class Storage(object):
             print('Bot do not know: {}'.format(search_aliases))
             return None
 
-    def check_aliases(self, aliases, find_str):                 # метод проверки псевдонимов (alias`ов)
+    """def check_aliases(self, aliases, find_str):                 # метод проверки псевдонимов (alias`ов)
 
         for aliases in Entry:                                   # запись из нового класса Entry, вместо строк
             if aliases == find_str:                             # если псевдоним совпадает со строкой
                 find_str = True                                 # найдена верная строка
-                print(find_str)
+                print(find_str)                                 ПО ИДЕЕ, НАМ ЭТОТ МЕТОД БОЛЬШЕ НЕ НУЖЕН
             else:
                 find_str = False
-                return None
+                return None"""
 
 
 class Food(object):
@@ -68,8 +69,18 @@ class Food(object):
 
         name_c = name_c.strip().split(" ")
         self.aliases_all = name_c
+        #return
 
     def has_alias(self, sought):
         for s in self.aliases_all:
             if s == sought:
                 return True
+
+    def get_aliases(self):
+        src = str(self.aliases_all)
+        res = self.aliases_all.split()
+        if res == None:
+            return {}
+        else:
+            res = Food._init_aliases(src)
+            return set(res)

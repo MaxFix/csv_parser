@@ -1,3 +1,20 @@
+
+
+def get_words(src):
+    res = list()
+
+    name_c = src
+    symb = '.,<>!?/\[]()~_-=+`@:\'#$%^&*'
+
+    for i in symb:
+        name_c = name_c.replace(i, '')
+
+    name_c = name_c.strip().split(" ")
+    res = name_c
+
+    return res
+
+
 class Storage(object):
 
     def __init__(self, path):                                   # имя файла в конструкторе path

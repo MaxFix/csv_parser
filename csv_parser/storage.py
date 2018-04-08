@@ -12,7 +12,6 @@ def get_words(src):
         name_c.remove('')
 
     res = name_c
-
     return res
 
 
